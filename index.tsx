@@ -25,7 +25,7 @@ import {
 
 function App() {
   const developerImage = "https://github.com/asder12346/asder12346.github.io/blob/main/samuel.jpg?raw=true";
-  const fallbackImage = "https://drive.google.com/file/d/1kO8tflYVuu3jLpCBgdKKptDPZUou9bWw/view?usp=drivesdk";
+  const fallbackImage = "https://asder12346.github.io/personal_porfolio/IMG_1996%20(1).jpg";
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
