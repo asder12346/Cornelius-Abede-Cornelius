@@ -12,19 +12,26 @@ import {
     CodeIcon, 
     SparklesIcon, 
     ArrowRightIcon, 
+    ArrowUpIcon,
+    LinkedInIcon,
+    GitHubIcon
 } from './components/Icons';
 
 function App() {
+  // Using the provided samuel.jpg which matches the uploaded photo
+  const developerImage = "https://github.com/asder12346/asder12346.github.io/blob/main/samuel.jpg?raw=true";
+  const fallbackImage = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop";
+
   return (
     <div className="portfolio-app">
-        <DottedGlowBackground gap={35} radius={1.2} color="rgba(255, 255, 255, 0.05)" glowColor="rgba(255, 140, 66, 0.3)" speedScale={0.15} />
+        <DottedGlowBackground gap={35} radius={1.2} color="rgba(255, 255, 255, 0.05)" glowColor="rgba(59, 130, 246, 0.3)" speedScale={0.1} />
         
         <nav className="top-nav">
-            <div className="nav-logo">SCA<span>.</span></div>
+            <div className="nav-logo">Cornelius<span>.</span></div>
             <div className="nav-links">
                 <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#projects">Projects</a>
+                <a href="#projects">Recent Works</a>
+                <a href="#education">Education</a>
                 <a href="#contact" className="nav-cta">Work With Me</a>
             </div>
         </nav>
@@ -40,100 +47,69 @@ function App() {
                         <p className="hero-description">{PORTFOLIO_DATA.heroBio}</p>
                         <div className="hero-actions">
                             <a href="#contact" className="btn btn-primary">Start a Project</a>
-                            <a href="#projects" className="btn btn-outline">Explore Work</a>
+                            <a href="#projects" className="btn btn-outline">View My Work</a>
                         </div>
                     </div>
                     <div className="hero-right">
                         <div className="portrait-container">
                             <div className="portrait-glow"></div>
                             <div className="portrait-orbit">
-                                <div className="orbit-item badge-1">Full Stack</div>
-                                <div className="orbit-item badge-2">Software Engineer</div>
-                                <div className="orbit-item badge-3">Clean Code</div>
+                                <div className="orbit-item badge-1">UI/UX Design</div>
+                                <div className="orbit-item badge-2">Clean Code</div>
+                                <div className="orbit-item badge-3">AI Integration</div>
                             </div>
-                            <img 
-                                src="https://github.com/asder12346/asder12346.github.io/blob/main/samuel.jpg?raw=true" 
-                                alt={PORTFOLIO_DATA.name} 
-                                className="portrait-img"
-                                onError={(e) => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop'; }}
-                            />
+                            <div className="portrait-frame">
+                                <img 
+                                    src={developerImage} 
+                                    alt={PORTFOLIO_DATA.name} 
+                                    className="portrait-img"
+                                    onError={(e) => { (e.target as HTMLImageElement).src = fallbackImage; }}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* ABOUT SECTION */}
+            {/* ABOUT ME SECTION */}
             <section id="about" className="section about-section">
                 <div className="container">
                     <div className="about-grid">
                         <div className="about-visual">
                             <div className="curved-photo-box">
-                                <img src="https://github.com/asder12346/asder12346.github.io/blob/main/samuel.jpg?raw=true" alt="Samaila" onError={(e) => { (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop'; }} />
-                                <div className="photo-badge">7+ Years Exp</div>
+                                <div className="photo-inner">
+                                    <img src={developerImage} alt="Samaila" onError={(e) => { (e.target as HTMLImageElement).src = fallbackImage; }} />
+                                </div>
+                                <div className="photo-badge-floating">
+                                    <span className="pulse-dot"></span>
+                                    Available for Work
+                                </div>
                             </div>
                         </div>
                         <div className="about-text">
                             <h2 className="section-title">About <span className="text-gradient">Me</span></h2>
                             <p className="large-text">{PORTFOLIO_DATA.aboutMe}</p>
-                            <p className="bio-text">{PORTFOLIO_DATA.detailedBio}</p>
+                            <p className="bio-paragraph">{PORTFOLIO_DATA.detailedBio}</p>
                             
-                            <h3 className="sub-title">Core Skills</h3>
+                            <div className="personal-info-grid">
+                                <div className="info-card">
+                                    <strong>Email</strong>
+                                    <span>{PORTFOLIO_DATA.personalInfo.email}</span>
+                                </div>
+                                <div className="info-card">
+                                    <strong>Phone</strong>
+                                    <span>07030175818</span>
+                                </div>
+                                <div className="info-card">
+                                    <strong>Location</strong>
+                                    <span>{PORTFOLIO_DATA.personalInfo.location}</span>
+                                </div>
+                            </div>
+
+                            <h3 className="sub-title">Technical Expertise</h3>
                             <div className="skills-tags">
-                                {PORTFOLIO_DATA.skills.map((skill, i) => (
+                                {[...PORTFOLIO_DATA.skills.programming, ...PORTFOLIO_DATA.skills.web].map((skill, i) => (
                                     <span key={i} className="skill-tag">{skill}</span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* SERVICES SECTION */}
-            <section id="services" className="section services-section">
-                <div className="container">
-                    <h2 className="section-title text-center">My <span className="text-gradient">Services</span></h2>
-                    <div className="services-grid">
-                        {PORTFOLIO_DATA.services.map((service, i) => (
-                            <div key={i} className="service-card">
-                                <div className="service-icon">{service.icon}</div>
-                                <h3>{service.title}</h3>
-                                <p>{service.desc}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* TIMELINE SECTION */}
-            <section id="experience" className="section experience-section">
-                <div className="container">
-                    <div className="timeline-grid">
-                        <div className="timeline-col">
-                            <h2 className="timeline-title">Academic <span className="text-gradient">Background</span></h2>
-                            <div className="timeline-list">
-                                {PORTFOLIO_DATA.education.map((edu, i) => (
-                                    <div key={i} className="timeline-item">
-                                        <div className="timeline-icon">🎓</div>
-                                        <div className="timeline-content">
-                                            <h3>{edu.degree}</h3>
-                                            <p className="timeline-subtitle">{edu.institution} ({edu.period})</p>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="timeline-col">
-                            <h2 className="timeline-title">Work <span className="text-gradient">Experience</span></h2>
-                            <div className="timeline-list">
-                                {PORTFOLIO_DATA.experience.map((job, i) => (
-                                    <div key={i} className="timeline-item">
-                                        <div className="timeline-icon">💼</div>
-                                        <div className="timeline-content">
-                                            <h3>{job.title}</h3>
-                                            <p className="timeline-subtitle">{job.company} ({job.period})</p>
-                                            <p className="timeline-desc">{job.desc}</p>
-                                        </div>
-                                    </div>
                                 ))}
                             </div>
                         </div>
@@ -144,22 +120,86 @@ function App() {
             {/* PROJECTS SECTION */}
             <section id="projects" className="section projects-section">
                 <div className="container">
-                    <h2 className="section-title text-center">Featured <span className="text-gradient">Projects</span></h2>
+                    <h2 className="section-title text-center">Recent <span className="text-gradient">Works</span></h2>
                     <div className="projects-grid">
                         {PORTFOLIO_DATA.projects.map((proj, i) => (
-                            <a key={i} href={proj.url} target="_blank" className="project-card">
-                                <div className="project-preview">
-                                    <div className="preview-overlay">
-                                        <span>View Case Study</span>
-                                        <ArrowRightIcon />
+                            <a key={i} href={proj.url} target="_blank" rel="noopener noreferrer" className="project-card-link">
+                                <div className="project-card">
+                                    <div className="project-preview">
+                                        <div className="preview-overlay">
+                                            <span>Visit Website</span>
+                                            <ArrowRightIcon />
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="project-info">
-                                    <h3>{proj.name}</h3>
-                                    <p>{proj.desc}</p>
+                                    <div className="project-info">
+                                        <div className="project-header">
+                                            <h3>{proj.name}</h3>
+                                            <span className="project-date">{proj.period}</span>
+                                        </div>
+                                        <p>{proj.desc}</p>
+                                        <div className="project-tech-badges">
+                                            {proj.tech.split(', ').map((t, idx) => <span key={idx} className="tech-badge">{t}</span>)}
+                                        </div>
+                                    </div>
                                 </div>
                             </a>
                         ))}
+                    </div>
+                    
+                    {/* ENHANCED PROJECTS CTA */}
+                    <div className="projects-cta-wrapper">
+                        <div className="projects-cta">
+                            <div className="cta-content">
+                                <div className="cta-icon-bg">
+                                    <SparklesIcon />
+                                </div>
+                                <div className="cta-text-group">
+                                    <h3>Ready to scale your digital presence?</h3>
+                                    <p>I build <strong>custom web applications</strong> and high-converting <strong>e-commerce solutions</strong> that deliver real business results.</p>
+                                </div>
+                                <a href="#contact" className="btn btn-primary cta-button">
+                                    Start Your Project Today
+                                    <ArrowRightIcon />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* EDUCATION & CERTS */}
+            <section id="education" className="section education-section">
+                <div className="container">
+                    <div className="timeline-grid">
+                        <div className="timeline-col">
+                            <h2 className="timeline-title">Academic Journey</h2>
+                            <div className="timeline-list">
+                                {PORTFOLIO_DATA.education.map((edu, i) => (
+                                    <div key={i} className="timeline-item">
+                                        <div className="timeline-icon">🎓</div>
+                                        <div className="timeline-content">
+                                            <h3>{edu.degree}</h3>
+                                            <p className="timeline-subtitle">{edu.institution}</p>
+                                            <p className="timeline-period">{edu.period}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="timeline-col">
+                            <h2 className="timeline-title">Certifications</h2>
+                            <div className="certs-grid">
+                                {PORTFOLIO_DATA.certifications.map((cert, i) => (
+                                    <div key={i} className="cert-card">
+                                        <div className="cert-badge">🏆</div>
+                                        <div className="cert-info">
+                                            <h4>{cert.name}</h4>
+                                            <p>{cert.issuedBy} • {cert.date}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -169,20 +209,38 @@ function App() {
                 <div className="container">
                     <div className="contact-card">
                         <div className="contact-text">
-                            <h2 className="section-title">Ready to build something <span className="text-gradient">Impactful?</span></h2>
-                            <p>I'm currently available for freelance work and full-time opportunities. If you have a project in mind or just want to chat about web technology, don't hesitate to reach out!</p>
-                            <div className="contact-details">
+                            <h2 className="section-title">Ready to build <span className="text-gradient">Together?</span></h2>
+                            <p>I am currently open to new opportunities to collaborate on impactful projects. Whether you need a <strong>custom web application</strong>, a robust <strong>e-commerce solution</strong>, or a <strong>modern business platform</strong> that stands out, I’m here to help you grow. Let's talk about your next big idea!</p>
+                            
+                            <div className="contact-info-list">
                                 <div className="contact-item">
-                                    <strong>Email:</strong>
-                                    <span>samuelcorneliusabede@gmail.com</span>
+                                    <div className="icon">📧</div>
+                                    <div>
+                                        <strong>Email</strong>
+                                        <span>{PORTFOLIO_DATA.personalInfo.email}</span>
+                                    </div>
                                 </div>
                                 <div className="contact-item">
-                                    <strong>Location:</strong>
-                                    <span>Lagos, Nigeria (Remote Friendly)</span>
+                                    <div className="icon">📞</div>
+                                    <div>
+                                        <strong>Phone</strong>
+                                        <span>07030175818</span>
+                                    </div>
+                                </div>
+                                <div className="contact-item">
+                                    <div className="icon">🔗</div>
+                                    <div>
+                                        <strong>Professional Profiles</strong>
+                                        <div className="social-icon-links">
+                                            <a href={PORTFOLIO_DATA.links.linkedin} target="_blank" title="LinkedIn" className="social-btn"><LinkedInIcon /></a>
+                                            <a href={PORTFOLIO_DATA.links.github} target="_blank" title="GitHub" className="social-btn"><GitHubIcon /></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div className="contact-form-wrapper">
+                            <h3 className="form-title">Send Me a Message</h3>
                             <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
                                 <div className="form-group">
                                     <input type="text" placeholder="Your Name" required />
@@ -203,32 +261,30 @@ function App() {
 
         <footer className="site-footer">
             <div className="container">
-                <div className="footer-top">
+                <div className="footer-content">
                     <div className="footer-brand">
-                        <div className="nav-logo">SCA<span>.</span></div>
-                        <p>Building scalable digital solutions with passion and precision.</p>
+                        <div className="nav-logo">Cornelius<span>.</span></div>
+                        <p>Building clean, easy-to-use websites that bring digital ideas to life.</p>
                     </div>
-                    <div className="footer-links">
-                        <div className="link-group">
-                            <h4>Navigation</h4>
-                            <a href="#about">About</a>
-                            <a href="#services">Services</a>
-                            <a href="#projects">Projects</a>
+                    <div className="footer-links-grid">
+                        <div className="footer-group">
+                            <h4>Pages</h4>
+                            <a href="#about">About Me</a>
+                            <a href="#projects">Recent Works</a>
+                            <a href="#contact">Contact</a>
                         </div>
-                        <div className="link-group">
+                        <div className="footer-group">
                             <h4>Connect</h4>
-                            <a href={PORTFOLIO_DATA.links.linkedin} target="_blank">LinkedIn</a>
-                            <a href={PORTFOLIO_DATA.links.github} target="_blank">GitHub</a>
-                            <a href={PORTFOLIO_DATA.links.email}>Email</a>
+                            <div className="footer-social-icons">
+                                <a href={PORTFOLIO_DATA.links.linkedin} target="_blank" className="social-btn"><LinkedInIcon /></a>
+                                <a href={PORTFOLIO_DATA.links.github} target="_blank" className="social-btn"><GitHubIcon /></a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className="footer-bottom">
-                    <p className="copyright">© {new Date().getFullYear()} {PORTFOLIO_DATA.name}. All Rights Reserved.</p>
-                    <div className="footer-social-icons">
-                         <a href={PORTFOLIO_DATA.links.linkedin} target="_blank">Li</a>
-                         <a href={PORTFOLIO_DATA.links.github} target="_blank">Gh</a>
-                    </div>
+                    <p className="copyright">© 2025 {PORTFOLIO_DATA.name}. All Rights Reserved.</p>
+                    <p className="designed-by">Designed & Built by {PORTFOLIO_DATA.name}</p>
                 </div>
             </div>
         </footer>

@@ -6,39 +6,78 @@
 
 export const PORTFOLIO_DATA = {
     name: "Samaila Cornelius Abede",
-    role: "Full Stack Web Developer",
-    heroBio: "I’m a creative and dedicated full-stack developer who loves bringing complex ideas to life with elegant code. I build scalable, high-performance web applications that provide seamless user experiences across all devices.",
-    aboutMe: "Hi, I am Samaila Cornelius Abede, an enthusiastic Full Stack Web Developer & UI/UX Designer. With a strong foundation in software engineering, I bridge the gap between complex backend logic and intuitive frontend design. I am passionate about clean code, modern architectures, and leveraging AI to build the future of the web.",
-    detailedBio: "From startups to established brands, I help individuals and businesses grow their digital presence through robust, reliable, and impactful web solutions. Let's transform your vision into reality.",
+    role: "Full Stack Software Engineering Student & Web Designer",
+    heroBio: "I’m Samaila Cornelius Abede, a creative and dedicated web designer who loves bringing ideas to life on the internet. I build clean, easy-to-use websites that work perfectly on all devices.",
+    aboutMe: "I’m Samaila Cornelius Abede, a creative and dedicated web designer who loves bringing ideas to life on the internet. I build clean, easy-to-use websites that work well on both phones and computers. Whether it’s a personal website or a business page, I focus on making it look great and function smoothly for visitors.",
+    detailedBio: "With hands-on experience in real-world projects and a growing portfolio, I combine creativity with functionality to bring digital ideas to life. I'm also constantly learning and exploring how AI and modern tech tools can enhance the web experience. Whether you're a startup or an individual looking for a reliable web developer, I’m here to build and grow your online presence one clean line of code at a time.",
+    personalInfo: {
+        email: "Samuelabedecornelius@gmail.com",
+        phone: "(+234) 703-017-5818",
+        location: "Kaduna, Nigeria",
+        linkedin: "linkedin.com/in/samuel-abede-cornelius22"
+    },
     links: {
         linkedin: "https://www.linkedin.com/in/samuel-abede-cornelius22",
         github: "https://github.com/asder12346",
         portfolio: "https://cornelius-website-with-react.vercel.app/",
-        email: "mailto:samuelcorneliusabede@gmail.com"
+        email: "mailto:Samuelabedecornelius@gmail.com"
     },
-    skills: [
-        "React & Next.js", "TypeScript", "Node.js & Express", "MongoDB & PostgreSQL", "REST & GraphQL", "Tailwind CSS", "UI/UX Architecture", "Cloud Deployment (Vercel/AWS)"
-    ],
-    services: [
-        { title: "Web Development", desc: "Custom, responsive websites built with the latest technologies for speed and SEO.", icon: "🌐" },
-        { title: "UI/UX Design", desc: "User-centric interface designs that prioritize accessibility and visual storytelling.", icon: "🎨" },
-        { title: "API Integration", desc: "Connecting your platform with third-party services and building robust backends.", icon: "🔌" },
-        { title: "Performance Optimization", desc: "Speeding up existing sites to reduce bounce rates and improve user retention.", icon: "⚡" }
-    ],
+    skills: {
+        programming: ["Python", "JavaScript", "TypeScript"],
+        web: ["React", "HTML5", "CSS3", "Tailwind CSS"],
+        database: ["MongoDB", "PostgreSQL"],
+        soft: ["Communication", "Collaboration", "Problem-Solving", "AI Prompting"]
+    },
     experience: [
-        { title: "Full Stack Developer", company: "Corner_Tech", period: "2023 - Present", desc: "Architecting end-to-end web applications and managing cloud infrastructure." },
-        { title: "Frontend Lead", company: "Creative Web Agency", period: "2021 - 2023", desc: "Oversaw the development of over 15+ client projects focusing on responsive UI." },
-        { title: "Web Developer Intern", company: "Tech Startups", period: "2019 - 2021", desc: "Learned the ropes of modern web development and contributed to production codebases." }
+        { 
+            title: "Web Developer & Designer", 
+            company: "Freelance / Projects", 
+            period: "2023 - Present", 
+            desc: "Designing and developing responsive web applications for various clients and business initiatives." 
+        }
     ],
     education: [
-        { degree: "B.Sc in Software Engineering", institution: "Federal University of Technology", period: "2019 - 2023" },
-        { degree: "Full Stack Certification", institution: "Online Tech Academy", period: "2021 - 2022" },
-        { degree: "Secondary Education", institution: "City High School", period: "2013 - 2019" }
+        { 
+            degree: "Bachelor of Science in Software Engineering", 
+            institution: "Mewar International University", 
+            period: "Aug 2023 - May 2027 (Expected)",
+            coursework: ["Data Structures & Algorithms", "Web Development", "Artificial Intelligence", "Database Management Systems"]
+        }
     ],
     projects: [
-        { name: "Ahuma Global Nigeria", url: "https://asder12346.github.io/Ahuma-Global-Nigeria/", desc: "Logistics & Business Solutions Platform" },
-        { name: "Gama Cornelius", url: "https://asder12346.github.io/Gamma-Cornelius/", desc: "Digital Portfolio & Brand Showcase" },
-        { name: "Corner_Tech", url: "https://asder12346.github.io/CORNER-TECH/", desc: "Innovation and Tech Services Hub" },
-        { name: "Truth_Lens", url: "https://asder12346.github.io/Truth_Lens/", desc: "Content Platform for Visual Perspectives" }
+        { 
+            name: "Ahuma Global Nigeria", 
+            period: "Latest Work",
+            desc: "A professional platform for logistics and business solutions in Nigeria.",
+            tech: "HTML, CSS, JavaScript",
+            url: "https://asder12346.github.io/Ahuma-Global-Nigeria/" 
+        },
+        { 
+            name: "Gama Cornelius", 
+            period: "Latest Work",
+            desc: "Personal brand and digital showcase landing page.",
+            tech: "Web Design, Interactive UI",
+            url: "https://asder12346.github.io/Gamma-Cornelius/" 
+        },
+        { 
+            name: "Corner_Tech", 
+            period: "Latest Work",
+            desc: "Innovation hub and technology services showcase.",
+            tech: "Responsive Design, CSS Grid",
+            url: "https://asder12346.github.io/CORNER-TECH/" 
+        },
+        { 
+            name: "Truth_lens", 
+            period: "Latest Work",
+            desc: "A unique content platform focusing on visual and textual perspectives.",
+            tech: "Frontend Development",
+            url: "https://asder12346.github.io/Truth_Lens/" 
+        }
+    ],
+    certifications: [
+        { name: "Certified by Nigeria Computer Society", issuedBy: "Nigeria Computer Society", date: "November 2024" },
+        { name: "100 Days of Code (Angela Yu)", issuedBy: "Udemy", date: "2024" },
+        { name: "Learn Prompting Certification", issuedBy: "LearnPrompting", date: "2025" },
+        { name: "Generative AI for SMEs", issuedBy: "DBN", date: "February 2025" }
     ]
 };
