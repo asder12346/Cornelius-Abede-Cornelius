@@ -32,6 +32,7 @@ function App() {
                 <a href="#about">About</a>
                 <a href="#projects">Recent Works</a>
                 <a href="#education">Education</a>
+                <a href="#testimonials">Testimonials</a>
                 <a href="#contact" className="nav-cta">Work With Me</a>
             </div>
         </nav>
@@ -200,6 +201,33 @@ function App() {
                                 ))}
                             </div>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* TESTIMONIALS SECTION */}
+            <section id="testimonials" className="section testimonials-section">
+                <div className="container">
+                    <h2 className="section-title text-center">Trusted by <span className="text-gradient">Visionaries</span></h2>
+                    <div className="testimonials-grid">
+                        {PORTFOLIO_DATA.testimonials.map((t, i) => (
+                            <div key={i} className="testimonial-card">
+                                <div className="testimonial-header">
+                                    <div className="testimonial-stars">
+                                        {[...Array(t.rating)].map((_, idx) => <span key={idx}>★</span>)}
+                                    </div>
+                                    <div className="quote-icon">"</div>
+                                </div>
+                                <p className="testimonial-content">{t.content}</p>
+                                <div className="testimonial-author">
+                                    <img src={t.image} alt={t.name} className="author-image" />
+                                    <div className="author-info">
+                                        <h4>{t.name}</h4>
+                                        <p>{t.role}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </section>

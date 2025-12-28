@@ -79,5 +79,28 @@ export const PORTFOLIO_DATA = {
         { name: "100 Days of Code (Angela Yu)", issuedBy: "Udemy", date: "2024" },
         { name: "Learn Prompting Certification", issuedBy: "LearnPrompting", date: "2025" },
         { name: "Generative AI for SMEs", issuedBy: "DBN", date: "February 2025" }
+    ],
+    testimonials: [
+        {
+            name: "Ibrahim Musa",
+            role: "Founder, TechScale Solutions",
+            content: "Cornelius delivered a website that exceeded our expectations. His attention to detail and ability to translate our vision into a clean, functional UI was impressive.",
+            rating: 5,
+            image: "https://i.pravatar.cc/150?u=ibrahim"
+        },
+        {
+            name: "Blessing Okon",
+            role: "Marketing Manager, Ahuma Global",
+            content: "Working with Cornelius was a breeze. He is highly responsive and truly understands the importance of mobile-first design. Our traffic has improved significantly.",
+            rating: 5,
+            image: "https://i.pravatar.cc/150?u=blessing"
+        },
+        {
+            name: "David Chen",
+            role: "E-commerce Consultant",
+            content: "The custom dashboard he built for my project is top-notch. Clean code, great performance, and a very intuitive user interface. Highly recommended!",
+            rating: 5,
+            image: "https://i.pravatar.cc/150?u=david"
+        }
     ]
 };
