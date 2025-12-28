@@ -1,3 +1,4 @@
+
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -45,23 +46,46 @@ export default function DottedGlowBackground({
     const dpr = Math.max(1, window.devicePixelRatio || 1);
 
     const resize = () => {
-      const { width, height } = container.getBoundingClientRect();
-      el.width = Math.max(1, Math.floor(width * dpr));
-      el.height = Math.max(1, Math.floor(height * dpr));
-      el.style.width = `${width}px`;
-      el.style.height = `${height}px`;
-      ctx.scale(dpr, dpr);
+      if (stopped || !container || !el) return;
+      const rect = container.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+      
+      // Update canvas internal dimensions
+      const newWidth = Math.max(1, Math.floor(width * dpr));
+      const newHeight = Math.max(1, Math.floor(height * dpr));
+      
+      // Only update if dimensions actually changed to avoid unnecessary re-paints or loops
+      if (el.width !== newWidth || el.height !== newHeight) {
+        el.width = newWidth;
+        el.height = newHeight;
+        el.style.width = `${width}px`;
+        el.style.height = `${height}px`;
+        ctx.scale(dpr, dpr);
+      }
     };
 
-    const ro = new ResizeObserver(resize);
+    // Use requestAnimationFrame inside ResizeObserver to prevent loop notification errors
+    const ro = new ResizeObserver((entries) => {
+      if (!entries.length || stopped) return;
+      window.requestAnimationFrame(() => {
+        resize();
+      });
+    });
+
     ro.observe(container);
-    setTimeout(resize, 0);
+    
+    // Initial resize
+    resize();
 
     let dots: { x: number; y: number; phase: number; speed: number }[] = [];
 
     const regenDots = () => {
+      if (stopped || !container) return;
       dots = [];
-      const { width, height } = container.getBoundingClientRect();
+      const rect = container.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
       const cols = Math.ceil(width / gap) + 2;
       const rows = Math.ceil(height / gap) + 2;
       for (let i = -1; i < cols; i++) {
@@ -79,11 +103,20 @@ export default function DottedGlowBackground({
     };
 
     regenDots();
-    window.addEventListener("resize", regenDots);
+    
+    const handleWindowResize = () => {
+      regenDots();
+      resize();
+    };
+
+    window.addEventListener("resize", handleWindowResize);
 
     const draw = (now: number) => {
-      if (stopped) return;
-      const { width, height } = container.getBoundingClientRect();
+      if (stopped || !container) return;
+      const rect = container.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+      
       ctx.clearRect(0, 0, width, height);
       ctx.globalAlpha = opacity;
 
@@ -117,13 +150,13 @@ export default function DottedGlowBackground({
     return () => {
       stopped = true;
       cancelAnimationFrame(raf);
-      window.removeEventListener("resize", regenDots);
+      window.removeEventListener("resize", handleWindowResize);
       ro.disconnect();
     };
   }, [gap, radius, color, glowColor, opacity, speedMin, speedMax, speedScale]);
 
   return (
-    <div ref={containerRef} className={className} style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+    <div ref={containerRef} className={className} style={{ position: "absolute", inset: 0, zIndex: 0, pointerEvents: 'none', overflow: 'hidden' }}>
       <canvas ref={canvasRef} style={{ display: "block" }} />
     </div>
   );
