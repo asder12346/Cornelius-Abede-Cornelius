@@ -19,6 +19,9 @@ export const PORTFOLIO_DATA = {
     links: {
         linkedin: "https://www.linkedin.com/in/samuel-abede-cornelius22",
         github: "https://github.com/asder12346",
+        instagram: "https://instagram.com/",
+        x: "https://x.com/",
+        tiktok: "https://tiktok.com/",
         portfolio: "https://cornelius-website-with-react.vercel.app/",
         email: "mailto:Samuelabedecornelius@gmail.com"
     },
@@ -42,6 +45,18 @@ export const PORTFOLIO_DATA = {
             institution: "Mewar International University", 
             period: "Aug 2023 - May 2027 (Expected)",
             coursework: ["Data Structures & Algorithms", "Web Development", "Artificial Intelligence", "Database Management Systems"]
+        },
+        {
+            degree: "Secondary School Certificate",
+            institution: "Renaissance Gles College Secondary School, Katari",
+            period: "2017 - 2023",
+            coursework: ["Science & Technology", "Mathematics"]
+        },
+        {
+            degree: "Primary School Education",
+            institution: "Teldi Nursery and Primary School, Jere",
+            period: "2011 - 2017",
+            coursework: ["Foundational Studies"]
         }
     ],
     projects: [

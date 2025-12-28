@@ -4,38 +4,105 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { PORTFOLIO_DATA } from './constants';
 import DottedGlowBackground from './components/DottedGlowBackground';
+import SideDrawer from './components/SideDrawer';
 import { 
     CodeIcon, 
     SparklesIcon, 
     ArrowRightIcon, 
     ArrowUpIcon,
     LinkedInIcon,
-    GitHubIcon
+    GitHubIcon,
+    InstagramIcon,
+    XIcon,
+    TikTokIcon,
+    MenuIcon,
+    CloseIcon
 } from './components/Icons';
 
 function App() {
-  // Using the provided samuel.jpg which matches the uploaded photo
   const developerImage = "https://github.com/asder12346/asder12346.github.io/blob/main/samuel.jpg?raw=true";
   const fallbackImage = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop";
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Intersection Observer for Testimonials Animation
+  const testimonialRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    testimonialRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const navLinks = [
+    { name: 'About', href: '#about' },
+    { name: 'Works', href: '#projects' },
+    { name: 'Timeline', href: '#education' },
+    { name: 'Testimonials', href: '#testimonials' },
+  ];
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <div className="portfolio-app">
         <DottedGlowBackground gap={35} radius={1.2} color="rgba(255, 255, 255, 0.05)" glowColor="rgba(59, 130, 246, 0.3)" speedScale={0.1} />
         
         <nav className="top-nav">
-            <div className="nav-logo">Cornelius<span>.</span></div>
-            <div className="nav-links">
-                <a href="#about">About</a>
-                <a href="#projects">Recent Works</a>
-                <a href="#education">Education</a>
-                <a href="#testimonials">Testimonials</a>
-                <a href="#contact" className="nav-cta">Work With Me</a>
+            <div className="nav-logo" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+                Cornelius<span>.</span>
             </div>
+            
+            {/* Desktop Navigation */}
+            <div className="nav-links">
+                {navLinks.map((link) => (
+                    <a key={link.name} href={link.href} className="nav-link-item">{link.name}</a>
+                ))}
+                <a href="#contact" className="nav-cta">Connect</a>
+            </div>
+
+            {/* Mobile Toggle */}
+            <button className="mobile-menu-toggle" onClick={toggleMenu} aria-label="Toggle menu">
+                {isMenuOpen ? <CloseIcon /> : <MenuIcon />}
+            </button>
         </nav>
+
+        {/* Mobile Navigation Drawer */}
+        <SideDrawer isOpen={isMenuOpen} onClose={closeMenu} title="Menu">
+            <div className="mobile-nav-body">
+                {navLinks.map((link) => (
+                    <a key={link.name} href={link.href} className="mobile-nav-link" onClick={closeMenu}>
+                        {link.name}
+                        <ArrowRightIcon />
+                    </a>
+                ))}
+                <a href="#contact" className="btn btn-primary btn-block mobile-nav-cta" onClick={closeMenu}>
+                    Work With Me
+                </a>
+                <div className="mobile-nav-socials">
+                    <a href={PORTFOLIO_DATA.links.linkedin} target="_blank" className="social-btn"><LinkedInIcon /></a>
+                    <a href={PORTFOLIO_DATA.links.github} target="_blank" className="social-btn"><GitHubIcon /></a>
+                    <a href={PORTFOLIO_DATA.links.instagram} target="_blank" className="social-btn"><InstagramIcon /></a>
+                </div>
+            </div>
+        </SideDrawer>
 
         <main>
             {/* HERO SECTION */}
@@ -147,7 +214,6 @@ function App() {
                         ))}
                     </div>
                     
-                    {/* ENHANCED PROJECTS CTA */}
                     <div className="projects-cta-wrapper">
                         <div className="projects-cta">
                             <div className="cta-content">
@@ -191,7 +257,7 @@ function App() {
                             <h2 className="timeline-title">Certifications</h2>
                             <div className="certs-grid">
                                 {PORTFOLIO_DATA.certifications.map((cert, i) => (
-                                    <div key={i} className="cert-card">
+                                    <div key={i} className="cert-card-small">
                                         <div className="cert-badge">🏆</div>
                                         <div className="cert-info">
                                             <h4>{cert.name}</h4>
@@ -211,7 +277,12 @@ function App() {
                     <h2 className="section-title text-center">Trusted by <span className="text-gradient">Visionaries</span></h2>
                     <div className="testimonials-grid">
                         {PORTFOLIO_DATA.testimonials.map((t, i) => (
-                            <div key={i} className="testimonial-card">
+                            <div 
+                              key={i} 
+                              className="testimonial-card animate-on-scroll" 
+                              ref={el => testimonialRefs.current[i] = el}
+                              style={{ transitionDelay: `${i * 0.2}s` }}
+                            >
                                 <div className="testimonial-header">
                                     <div className="testimonial-stars">
                                         {[...Array(t.rating)].map((_, idx) => <span key={idx}>★</span>)}
@@ -258,10 +329,13 @@ function App() {
                                 <div className="contact-item">
                                     <div className="icon">🔗</div>
                                     <div>
-                                        <strong>Professional Profiles</strong>
+                                        <strong>Social Channels</strong>
                                         <div className="social-icon-links">
                                             <a href={PORTFOLIO_DATA.links.linkedin} target="_blank" title="LinkedIn" className="social-btn"><LinkedInIcon /></a>
                                             <a href={PORTFOLIO_DATA.links.github} target="_blank" title="GitHub" className="social-btn"><GitHubIcon /></a>
+                                            <a href={PORTFOLIO_DATA.links.instagram} target="_blank" title="Instagram" className="social-btn"><InstagramIcon /></a>
+                                            <a href={PORTFOLIO_DATA.links.x} target="_blank" title="X" className="social-btn"><XIcon /></a>
+                                            <a href={PORTFOLIO_DATA.links.tiktok} target="_blank" title="TikTok" className="social-btn"><TikTokIcon /></a>
                                         </div>
                                     </div>
                                 </div>
@@ -297,8 +371,9 @@ function App() {
                     <div className="footer-links-grid">
                         <div className="footer-group">
                             <h4>Pages</h4>
-                            <a href="#about">About Me</a>
-                            <a href="#projects">Recent Works</a>
+                            {navLinks.map(link => (
+                                <a key={link.name} href={link.href}>{link.name}</a>
+                            ))}
                             <a href="#contact">Contact</a>
                         </div>
                         <div className="footer-group">
@@ -306,6 +381,9 @@ function App() {
                             <div className="footer-social-icons">
                                 <a href={PORTFOLIO_DATA.links.linkedin} target="_blank" className="social-btn"><LinkedInIcon /></a>
                                 <a href={PORTFOLIO_DATA.links.github} target="_blank" className="social-btn"><GitHubIcon /></a>
+                                <a href={PORTFOLIO_DATA.links.instagram} target="_blank" className="social-btn"><InstagramIcon /></a>
+                                <a href={PORTFOLIO_DATA.links.x} target="_blank" className="social-btn"><XIcon /></a>
+                                <a href={PORTFOLIO_DATA.links.tiktok} target="_blank" className="social-btn"><TikTokIcon /></a>
                             </div>
                         </div>
                     </div>
