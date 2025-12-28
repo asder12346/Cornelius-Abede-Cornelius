@@ -63,28 +63,28 @@ export const PORTFOLIO_DATA = {
         { 
             name: "Ahuma Global Nigeria", 
             period: "Latest Work",
-            desc: "A professional platform for logistics and business solutions in Nigeria.",
+            desc: "Logistics and business solutions platform.",
             tech: "HTML, CSS, JavaScript",
             url: "https://asder12346.github.io/Ahuma-Global-Nigeria/" 
         },
         { 
             name: "Gama Cornelius", 
             period: "Latest Work",
-            desc: "Personal brand and digital showcase landing page.",
+            desc: "Premium digital showcase landing page.",
             tech: "Web Design, Interactive UI",
             url: "https://asder12346.github.io/Gamma-Cornelius/" 
         },
         { 
             name: "Corner_Tech", 
             period: "Latest Work",
-            desc: "Innovation hub and technology services showcase.",
+            desc: "Innovation hub for technology services.",
             tech: "Responsive Design, CSS Grid",
             url: "https://asder12346.github.io/CORNER-TECH/" 
         },
         { 
             name: "Truth_lens", 
             period: "Latest Work",
-            desc: "A unique content platform focusing on visual and textual perspectives.",
+            desc: "Visual storytelling and content platform.",
             tech: "Frontend Development",
             url: "https://asder12346.github.io/Truth_Lens/" 
         }
